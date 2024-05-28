@@ -23,7 +23,7 @@ export default function LoginForm(){
                     inputPlaceHolder={"Type your password"}
                 />
                 <FormButton buttonText={"Login"} />
-                <FormFooter linkPath={"/registartion"} linkText={"Register"} footerText={"Don't you have an account ?"} />
+                <FormFooter linkPath={"/registration"} linkText={"Register"} footerText={"Don't you have an account ?"} />
             </form>
         </FormContainer>
     );
