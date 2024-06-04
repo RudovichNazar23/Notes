@@ -1,4 +1,6 @@
 import NavBarButton from "./NavPanelComponents/NavBarButton";
+import CreateNoteForm from "./CreateNoteForm";
+import NoteCard from "./NoteCard";
 
 import api from "../utils/api";
 import { useEffect, useState } from "react";
@@ -6,7 +8,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function Home(){
     const [userInfo, setUserInfo] = useState(undefined);
+    const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
+
+    const notes = [];
 
     useEffect(() => {
         if(!userInfo) {
@@ -27,12 +32,17 @@ export default function Home(){
         navigate("/");
     };
 
+    const onSetIsOpen = (event) => {
+        event.preventDefault();
+        setIsOpen(!isOpen);
+    };
+
     return (
         <div>
             <nav className="navbar navbar-light bg-light">
                 <div className="container-fluid" >
                     <NavBarButton buttonValue={"Logout"} onClick={onLogout}/>
-                    <NavBarButton buttonValue={"Create new note"} />
+                    <NavBarButton buttonValue={isOpen ? "Back to my notes" : "Create note"} onClick={onSetIsOpen} />
                     <div className="p-1" style={{fontSize: "20px"}}>
                         {
                             userInfo && (
@@ -45,6 +55,23 @@ export default function Home(){
                     </div>
                 </div>
             </nav>
+            <div className="container mt-5 d-flex flex-column align-items-center p-2">
+                {
+                    isOpen ? (
+                        <CreateNoteForm />
+                    ) : (
+                        notes.length > 0 ? (
+                            notes.map(
+                                (note, noteIndex) => <NoteCard key={noteIndex} note={note} />
+                            )
+                        ) : (
+                            <div className="container d-flex flex-row align-items-center justify-content-center">
+                                <h4>There is not any notes here...</h4>
+                            </div>
+                        )
+                    )
+                }
+            </div>
         </div>
     );
 };
