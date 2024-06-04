@@ -1,21 +1,25 @@
 import NavBarButton from "./NavPanelComponents/NavBarButton";
 
 import api from "../utils/api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Home(){
     const [userInfo, setUserInfo] = useState(undefined);
     const navigate = useNavigate();
 
-    api.get("api/my_profile/").then(
-        (response) => {
-            setUserInfo(response.data)
+    useEffect(() => {
+        if(!userInfo) {
+            api.get("api/my_profile/").then(
+                (response) => {
+                    setUserInfo(response.data)
+                }
+            ).catch((error) => {
+                alert(error.reponse.data);
+                navigate("/")
+            });
         }
-    ).catch((error) => {
-        alert(error.reponse.data);
-        navigate("/")
-    });
+    }, []);
 
     const onLogout = (event) => {
         event.preventDefault();
