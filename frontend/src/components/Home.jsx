@@ -1,6 +1,6 @@
 import NavBarButton from "./NavPanelComponents/NavBarButton";
 import CreateNoteForm from "./CreateNoteForm";
-import NoteCard from "./NoteCard";
+import NoteContainer from "./NoteContainer";
 
 import api from "../utils/api";
 import { useEffect, useState } from "react";
@@ -60,15 +60,7 @@ export default function Home(){
                     isOpen ? (
                         <CreateNoteForm />
                     ) : (
-                        notes.length > 0 ? (
-                            notes.map(
-                                (note, noteIndex) => <NoteCard key={noteIndex} note={note} />
-                            )
-                        ) : (
-                            <div className="container d-flex flex-row align-items-center justify-content-center">
-                                <h4>There is not any notes here...</h4>
-                            </div>
-                        )
+                        <NoteContainer />
                     )
                 }
             </div>
