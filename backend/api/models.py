@@ -7,3 +7,6 @@ class Note(models.Model):
     note_title = models.CharField(max_length=50)
     note_content = models.TextField()
     note_date_created = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return f"{self.note_creator} - {self.note_title}"

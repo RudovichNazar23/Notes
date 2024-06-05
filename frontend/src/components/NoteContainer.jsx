@@ -11,14 +11,14 @@ export default function NoteContainer(){
         () => {
             api.get("api/note_list/")
             .then((reponse) => setNotes(reponse.data))
-            .catch((error) => console.log(error))
-        }, [notes]
+            .catch((error) => alert(error))
+        }, []
     );
 
     return (
         <>
             {
-                notes ? (
+                notes.length > 0 ? (
                     notes.map(
                         (note, noteIndex) => <NoteCard key={noteIndex} note={note} />
                     )
