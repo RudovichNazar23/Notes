@@ -15,8 +15,8 @@ export default function CreateNoteForm(){
 
         const reponse = api.post("api/create_note/", { "note_title": noteTitle, "note_content": noteContent });
         reponse
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
+        .then((res) => res.status === 201 && window.location.reload())
+        .catch((error) => alert(error));
     };
 
     return (
