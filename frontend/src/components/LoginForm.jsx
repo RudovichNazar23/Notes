@@ -26,7 +26,7 @@ export default function LoginForm(){
             if(response.status === 200){
                 localStorage.setItem(ACCESS_TOKEN, response.data.access);
                 localStorage.setItem(REFRESH_TOKEN, response.data.refresh);
-                navigate("/home")
+                navigate("/")
             };
         })
         .catch((error) => {setErrorDetail(error.response.data.detail)});
