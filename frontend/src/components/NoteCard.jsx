@@ -1,6 +1,7 @@
-export default function NoteCard({ note }){
-    const { note_title, note_content } = note;
+import NoteDate from "./NoteDate";
 
+export default function NoteCard({ note }){
+    const { note_title, note_content, note_date_created } = note;
     return (
         <div className="card m-1 p-2" style={{width: "500px", height: "250px"}}>
             <div className="card-body">
@@ -8,6 +9,7 @@ export default function NoteCard({ note }){
                 <hr />
                 <p className="card-text">{note_content}</p>
                 <hr />
+                <NoteDate date={note_date_created} />
             </div>
             <div className="d-flex flex-row justify-content-between" style={{width: "160px"}}>
                 <a className="btn btn-info">Update</a>
