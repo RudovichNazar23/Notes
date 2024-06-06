@@ -29,7 +29,7 @@ export default function Home(){
     const onLogout = (event) => {
         event.preventDefault();
         localStorage.clear();
-        navigate("/");
+        navigate("/login");
     };
 
     const onSetIsOpen = (event) => {

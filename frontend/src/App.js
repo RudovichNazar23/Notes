@@ -14,14 +14,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route 
-            path='/home' 
+            path='/' 
             element={
               <ProtectedRoute>
                 <Home />
               </ProtectedRoute>
             } 
           />
-          <Route path='' element={<LoginForm />} />
+          <Route path='/login' element={<LoginForm />} />
           <Route path='/registration' element={<RegistrationForm />} />
           <Route path='*' element={<PageNotFound />}></Route>
         </Routes>
