@@ -40,7 +40,7 @@ class NoteListView(generics.ListAPIView):
 
 class DeleteNoteView(generics.DestroyAPIView):
     serializer_class = NoteSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
     
     def get_queryset(self):
         user = self.request.user
