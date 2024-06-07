@@ -14,16 +14,14 @@ export default function Home(){
     const notes = [];
 
     useEffect(() => {
-        if(!userInfo) {
-            api.get("api/my_profile/").then(
-                (response) => {
-                    setUserInfo(response.data)
-                }
-            ).catch((error) => {
-                alert(error.reponse.data);
-                navigate("/")
-            });
-        }
+        api.get("api/my_profile/").then(
+            (response) => {
+                setUserInfo(response.data)
+            }
+        ).catch((error) => {
+            alert(error.reponse.data);
+            navigate("/")
+        });
     }, []);
 
     const onLogout = (event) => {
