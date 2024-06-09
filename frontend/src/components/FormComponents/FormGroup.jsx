@@ -1,4 +1,4 @@
-export default function FormGroup({ labelValue, inputType, inputPlaceHolder, inputId, fieldErrors }){
+export default function FormGroup({ labelValue, inputType, inputPlaceHolder, inputId, inputValue ,fieldErrors }){
     return (
         <div className="form-group m-1">
             <label>
@@ -7,9 +7,9 @@ export default function FormGroup({ labelValue, inputType, inputPlaceHolder, inp
                 </strong>
             </label>
             {
-                inputType === "textarea" ? <textarea placeholder={inputPlaceHolder} id={inputId} className="form-control"/>
+                inputType === "textarea" ? <textarea placeholder={inputPlaceHolder} id={inputId} className="form-control" value={inputValue}/>
                 :
-                <input type={inputType} placeholder={inputPlaceHolder} id={inputId} className="form-control" />
+                <input type={inputType} placeholder={inputPlaceHolder} id={inputId} className="form-control" value={inputValue} />
             }
             {
                     fieldErrors && (
