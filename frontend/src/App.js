@@ -7,6 +7,7 @@ import RegistrationForm from './components/RegistrationForm';
 import LoginForm from './components/LoginForm';
 import Home from './components/Home';
 import PageNotFound from './components/PageNotFound';
+import UserProfile from './components/UserProfile';
 
 function App() {
   return (
@@ -24,6 +25,15 @@ function App() {
           <Route path='/login' element={<LoginForm />} />
           <Route path='/registration' element={<RegistrationForm />} />
           <Route path='*' element={<PageNotFound />}></Route>
+          <Route 
+            path='/profile' 
+            element={
+              <ProtectedRoute>
+                  <UserProfile />
+              </ProtectedRoute>
+            }
+          > 
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
