@@ -11,8 +11,6 @@ export default function Home(){
     const [isOpen, setIsOpen] = useState(false);
     const navigate = useNavigate();
 
-    const notes = [];
-
     useEffect(() => {
         api.get("api/my_profile/").then(
             (response) => {
@@ -45,7 +43,7 @@ export default function Home(){
                         {
                             userInfo && (
                                 <div className="d-flex flex-row align-items-center justify-content-between">
-                                    <div className="m-1">{userInfo.username}</div>
+                                    <NavBarButton buttonValue={userInfo.username} onClick={() => navigate("/profile")} />
                                     <img src="/user.png" />
                                 </div>
                             )
