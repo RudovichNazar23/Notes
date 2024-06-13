@@ -3,7 +3,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 
-from .models import Note
+from .models import Note, UserProfile
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -30,3 +30,12 @@ class NoteSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             "note_creator": {"read_only": True}
         }    
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = ["user", "user_profile_picture", "email", "city", "user_description"]
+        extra_kwargs = {
+            "user": {"read_only": True}
+        }
