@@ -18,6 +18,7 @@ class UserSerializer(serializers.ModelSerializer):
             validate_password(password=user_password, user=user)
             user.set_password(validated_data["password"])
             user.save()
+            UserProfile.objects.create(user=user)
         except ValidationError as error:
             raise serializers.ValidationError({"password": error.messages})
         return user
@@ -33,6 +34,8 @@ class NoteSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
+
     class Meta:
         model = UserProfile
         fields = ["user", "user_profile_picture", "email", "city", "user_description"]
