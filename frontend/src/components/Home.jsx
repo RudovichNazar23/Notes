@@ -1,6 +1,9 @@
 import NavBarButton from "./NavPanelComponents/NavBarButton";
 import CreateNoteForm from "./CreateNoteForm";
 import NoteContainer from "./NoteContainer";
+import NavBarContainer from "./NavPanelComponents/NavBarContainer";
+
+import "../index.css";
 
 import api from "../utils/api";
 import { useEffect, useState } from "react";
@@ -12,7 +15,7 @@ export default function Home(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        api.get("api/my_profile/").then(
+        api.get("api/get_request_user/").then(
             (response) => {
                 setUserInfo(response.data)
             }
@@ -34,23 +37,21 @@ export default function Home(){
     };
 
     return (
-        <div>
-            <nav className="navbar navbar-light bg-light">
-                <div className="container-fluid" >
-                    <NavBarButton buttonValue={"Logout"} onClick={onLogout}/>
-                    <NavBarButton buttonValue={isOpen ? "Back to my notes" : "Create note"} onClick={onSetIsOpen} />
-                    <div className="p-1" style={{fontSize: "20px"}}>
-                        {
-                            userInfo && (
-                                <div className="d-flex flex-row align-items-center justify-content-between">
-                                    <NavBarButton buttonValue={userInfo.username} onClick={() => navigate("/profile")} />
-                                    <img src="/user.png" />
-                                </div>
-                            )
-                        }
-                    </div>
+        <>
+            <NavBarContainer>
+                <NavBarButton buttonValue={"Logout"} onClick={onLogout}/>
+                <NavBarButton buttonValue={isOpen ? "Back to my notes" : "Create note"} onClick={onSetIsOpen} />
+                <div className="p-1">
+                    {
+                        userInfo && (
+                            <div className="d-flex flex-row align-items-center justify-content-between">
+                                <NavBarButton buttonValue={userInfo.username} onClick={() => navigate("/profile")} />
+                                <img src="/user.png" />
+                            </div>
+                        )
+                    }
                 </div>
-            </nav>
+            </NavBarContainer>
             <div className="container mt-5 d-flex flex-column align-items-center p-2">
                 {
                     isOpen ? (
@@ -60,6 +61,6 @@ export default function Home(){
                     )
                 }
             </div>
-        </div>
+        </>
     );
 };
