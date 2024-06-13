@@ -13,7 +13,7 @@ class Note(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, unique=True)
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     user_profile_picture = models.FileField(upload_to="profile_pictures", blank=True)
     email = models.EmailField(max_length=50, blank=True)
     city = models.CharField(max_length=50, blank=True)
