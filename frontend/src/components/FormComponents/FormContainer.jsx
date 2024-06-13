@@ -2,7 +2,7 @@ export default function FormContainer({ children }){
     const divStyle = {
         "width": "100%",
         "height": "800px",
-        "fontSize": "22px"
+        "fontSize": "20px"
     };
 
     return(

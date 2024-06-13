@@ -1,6 +1,6 @@
 export default function NavBarButton({ buttonValue, onClick }){
     return (
-        <button className="btn" style={{fontSize: "20px"}} onClick={onClick}>
+        <button className="btn" onClick={onClick}>
             {buttonValue}
         </button>
     )
