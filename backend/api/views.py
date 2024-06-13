@@ -3,8 +3,8 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .serializers import UserSerializer, NoteSerializer
-from .models import Note
+from .serializers import UserSerializer, NoteSerializer, UserProfileSerializer
+from .models import Note, UserProfile
 from .permissions import IsOwner
 
 
@@ -54,3 +54,12 @@ class UpdateNoteView(generics.UpdateAPIView):
     def get_queryset(self):
         user = self.request.user
         return Note.objects.filter(note_creator=user)
+
+
+class UserProfileDetailView(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        user_profile = UserProfile.objects.get(user=request.user)
+        serialized_user_profile = UserProfileSerializer(user_profile)
+        return Response(serialized_user_profile.data)
