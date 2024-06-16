@@ -34,7 +34,7 @@ export default function UserProfile(){
     return (
         <>
             <ProfileBar username={userData.user} />
-            <div className="d-flex flex-row p-3 justify-content-between border">
+            <div className="d-flex flex-row p-3 justify-content-between">
                 <ProfilePicture srcPath={userData.user_profile_picture} />
                 <div className="p-2 d-flex flex-column align-items-center justify-content-between" style={{width: "100%", height: "250px"}}>
                     <ProfileInfoGroup fieldValue={userData.user} />
