@@ -63,3 +63,11 @@ class UserProfileDetailView(APIView):
         user_profile = UserProfile.objects.get(user=request.user)
         serialized_user_profile = UserProfileSerializer(user_profile)
         return Response(serialized_user_profile.data)
+    
+
+class UpdateUserProfileView(generics.UpdateAPIView):
+    serializer_class = UserProfileSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return UserProfile.objects.filter(user=self.request.user)

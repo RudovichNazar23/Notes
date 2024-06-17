@@ -1,5 +1,14 @@
 from django.urls import path
-from .views import CreateUserView, CurrentUserView, CreateNoteView, NoteListView, DeleteNoteView, UpdateNoteView, UserProfileDetailView
+from .views import (
+    CreateUserView, 
+    CurrentUserView, 
+    CreateNoteView, 
+    NoteListView, 
+    DeleteNoteView, 
+    UpdateNoteView, 
+    UserProfileDetailView, 
+    UpdateUserProfileView
+)
 
 
 urlpatterns = [
@@ -10,4 +19,5 @@ urlpatterns = [
     path("delete_note/<int:pk>/", DeleteNoteView.as_view(), name="delete_note"),
     path("update_note/<int:pk>/", UpdateNoteView.as_view(), name="update_note"),
     path("user_profile/", UserProfileDetailView.as_view(), name="user_profile"),
+    path("update_user_profile/<int:pk>/", UpdateUserProfileView.as_view(), name="update_user_profile"),
 ]
