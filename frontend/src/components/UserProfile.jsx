@@ -1,6 +1,7 @@
 import ProfileBar from "./UserProfileComponents/ProfileBar";
 import ProfilePicture from "./UserProfileComponents/ProfilePicture";
 import ProfileInfoGroup from "./UserProfileComponents/ProfileInfoGroup";
+import UserDescription from "./UserProfileComponents/UserDescription";
 
 import "../index.css";
 import { useState, useEffect } from "react";
@@ -42,9 +43,7 @@ export default function UserProfile(){
                     <ProfileInfoGroup fieldValue={userData.city} />
                 </div>
             </div>
-            <div className="mt-3 p-3">
-                {userData.user_description}
-            </div>
+            <UserDescription description={userData.user_description} />
         </>
     );
 };
