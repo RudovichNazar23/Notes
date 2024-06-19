@@ -15,9 +15,9 @@ class Note(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
     user_profile_picture = models.FileField(upload_to="profile_pictures", blank=True)
-    email = models.EmailField(max_length=50, blank=True)
+    email = models.EmailField(max_length=50, blank=True, unique=True)
     city = models.CharField(max_length=50, blank=True)
-    user_description = models.TextField(max_length=100, blank=True)
+    user_description = models.TextField(max_length=255, blank=True)
 
     def __str__(self) -> str:
         return f"{self.user}"

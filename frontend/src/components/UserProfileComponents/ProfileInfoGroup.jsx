@@ -1,34 +1,9 @@
-import { useEffect, useState } from "react";
-import api from "../../utils/api";
+import useUpdateHook from "../../custom_hooks/useUpdateHook";
 
-export default function ProfileInfoGroup({ fieldValue, inputName, profileId }){
+import ErrorMessagesContainer from "./ErrorMessagesContainer";
 
-    const [isOpen, setIsOpen] = useState(false);
-    const [inputValue, setInputValue] = useState(fieldValue);
-    const [errorMessages, setErrorMessages] = useState([]);
-
-    useEffect(() => { setInputValue(fieldValue) }, [fieldValue])
-
-    const DoubleClickHandler = () => setIsOpen(!isOpen);
-
-    const onChangeHandler = (event) => {
-        setInputValue(event.target.value);
-    };
-
-    const updateHandler = (event) => {
-        event.preventDefault();
-        const response = api.put(`api/update_user_profile/${profileId}/`, { [inputName]: inputValue });
-        response
-        .then((res) => {
-            if(res.status === 200){
-                setInputValue(res.data[inputName]);
-                setIsOpen(false);
-            }
-        })
-        .catch((error) => {
-            setErrorMessages(error.response.data[inputName]);
-        });
-    };
+export default function ProfileInfoGroup({ value, inputName, profileId }){
+    const { isOpen, fieldValue, errorMessages, onDoubleClickHandler, onChangeHandler, onClickHandler } = useUpdateHook(value, profileId, inputName);
 
     return (
         <div className="m-1 d-flex flex-row justify-content-between" style={{width: "65%"}}>
@@ -36,27 +11,19 @@ export default function ProfileInfoGroup({ fieldValue, inputName, profileId }){
                 isOpen ? (
                     <>
                         <div className="container d-flex flex-column">
-                            <input type="text" value={inputValue} 
+                            <input type="text" value={fieldValue} 
                                             className="form-control" 
-                                            onDoubleClick={DoubleClickHandler}
+                                            onDoubleClick={onDoubleClickHandler}
                                             onChange={onChangeHandler}
                             />
-                            <div className="d-flex flex-column">
-                                {
-                                    errorMessages.length > 0 && (
-                                        errorMessages.map(
-                                            (error, errorId) => <div key={errorId} className="text-danger m-1 p-1">{error}</div>
-                                        )
-                                    )
-                                }
-                            </div>
+                            { errorMessages.length > 0 && (<ErrorMessagesContainer messages={errorMessages} />) }
                         </div>
                         <div>
-                            <button className="btn btn-primary m-1" onClick={updateHandler}>Update</button>
+                            <button className="btn btn-primary m-1" onClick={onClickHandler}>Update</button>
                         </div>
                     </>
                 ) : (
-                    <div className="form-control" onDoubleClick={DoubleClickHandler}>{inputValue}</div>
+                    <div className="form-control" onDoubleClick={onDoubleClickHandler}>{fieldValue}</div>
                 )
             }
         </div>
