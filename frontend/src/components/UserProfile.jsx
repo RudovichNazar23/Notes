@@ -37,7 +37,7 @@ export default function UserProfile(){
         <>
             <ProfileBar username={userData.user} />
             <div className="d-flex flex-row p-3 justify-content-between">
-                <ProfilePicture srcPath={userData.user_profile_picture} />
+                <ProfilePicture srcPath={userData.user_profile_picture} profileId={userData.id} />
                 <div className="p-2 d-flex flex-column align-items-center justify-content-center" style={{width: "100%", height: "250px"}}>
                     <ProfileInfoGroup value={userData.email} inputName={"email"} profileId={userData.id} />
                     <ProfileInfoGroup value={userData.city} inputName={"city"} profileId={userData.id} />
