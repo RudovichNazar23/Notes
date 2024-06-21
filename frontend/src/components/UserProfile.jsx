@@ -39,8 +39,14 @@ export default function UserProfile(){
             <div className="d-flex flex-row p-3 justify-content-between">
                 <ProfilePicture srcPath={userData.user_profile_picture} profileId={userData.id} />
                 <div className="p-2 d-flex flex-column align-items-center justify-content-center" style={{width: "100%", height: "250px"}}>
-                    <ProfileInfoGroup value={userData.email} inputName={"email"} profileId={userData.id} />
-                    <ProfileInfoGroup value={userData.city} inputName={"city"} profileId={userData.id} />
+                    <div className="container">
+                        <label className="m-1">Email</label>
+                        <ProfileInfoGroup value={userData.email} inputName={"email"} profileId={userData.id} />
+                    </div>
+                    <div className="container">
+                        <label className="m-1">City</label>
+                        <ProfileInfoGroup value={userData.city} inputName={"city"} profileId={userData.id} />
+                    </div>
                 </div>
             </div>
             <UserDescription description={userData.user_description} profileId={userData.id} inputName={"user_description"} />

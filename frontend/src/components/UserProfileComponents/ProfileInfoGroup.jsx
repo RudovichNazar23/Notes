@@ -4,6 +4,7 @@ import ErrorMessagesContainer from "./ErrorMessagesContainer";
 
 export default function ProfileInfoGroup({ value, inputName, profileId }){
     const { isOpen, fieldValue, errorMessages, onDoubleClickHandler, onChangeHandler, onClickHandler } = useUpdateHook(value, profileId, inputName);
+    const formFieldStyle = "form-control";
 
     return (
         <div className="m-1 d-flex flex-row justify-content-between" style={{width: "65%"}}>
@@ -23,7 +24,7 @@ export default function ProfileInfoGroup({ value, inputName, profileId }){
                         </div>
                     </>
                 ) : (
-                    <div className="form-control" onDoubleClick={onDoubleClickHandler}>{fieldValue}</div>
+                    <div className={fieldValue ? "form-control": `${formFieldStyle} text-muted`} onDoubleClick={onDoubleClickHandler}>{!fieldValue ? "Lack of information" : fieldValue}</div>
                 )
             }
         </div>
