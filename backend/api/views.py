@@ -2,6 +2,7 @@ from rest_framework import permissions
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import viewsets
 
 from .serializers import UserSerializer, NoteSerializer, UserProfileSerializer
 from .models import Note, UserProfile
@@ -19,6 +20,20 @@ class CurrentUserView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
+    
+
+class NoteViewSet(viewsets.ModelViewSet):
+    serializer_class = NoteSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Note.objects.filter(note_creator=user)
+    
+    def perform_create(self, serializer):
+        if serializer.is_valid():
+            serializer.save(note_creator=self.request.user)
+
 
 class CreateNoteView(generics.CreateAPIView):
     serializer_class = NoteSerializer
