@@ -35,42 +35,6 @@ class NoteViewSet(viewsets.ModelViewSet):
             serializer.save(note_creator=self.request.user)
 
 
-class CreateNoteView(generics.CreateAPIView):
-    serializer_class = NoteSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def perform_create(self, serializer):
-        if serializer.is_valid():
-            serializer.save(note_creator=self.request.user)
-
-
-class NoteListView(generics.ListAPIView):
-    serializer_class = NoteSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self):
-        queryset = Note.objects.filter(note_creator=self.request.user)
-        return queryset
-
-
-class DeleteNoteView(generics.DestroyAPIView):
-    serializer_class = NoteSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwner]
-    
-    def get_queryset(self):
-        user = self.request.user
-        return Note.objects.filter(note_creator=user)
-
-
-class UpdateNoteView(generics.UpdateAPIView):
-    serializer_class = NoteSerializer
-    permission_classes = [permissions.IsAuthenticated, IsOwner]
-
-    def get_queryset(self):
-        user = self.request.user
-        return Note.objects.filter(note_creator=user)
-
-
 class UserProfileDetailView(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
