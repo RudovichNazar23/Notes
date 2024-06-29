@@ -23,7 +23,7 @@ export default function NoteCard({ note }){
 
     const onDeleteNote = (event) => {
         event.preventDefault();
-        const response = api.delete(`api/delete_note/${id}/`);
+        const response = api.delete(`api/note/${id}/`);
         response
         .then((res) => res.status === 204 && window.location.reload())
         .catch((error) => alert(error.response.data.detail));
@@ -33,7 +33,7 @@ export default function NoteCard({ note }){
         event.preventDefault();
         const { note_title, note_content } = inputValue;
 
-        const response = api.put(`api/update_note/${id}/`, { note_title, note_content });
+        const response = api.put(`api/note/${id}/`, { note_title, note_content });
         response.then(
             (res) => {
                 if(res.status === 200){
