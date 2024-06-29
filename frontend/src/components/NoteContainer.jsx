@@ -9,7 +9,7 @@ export default function NoteContainer(){
 
     useEffect(
         () => {
-            api.get("api/note_list/")
+            api.get("api/note/")
             .then((reponse) => setNotes(reponse.data))
             .catch((error) => alert(error))
         }, []

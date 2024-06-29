@@ -13,7 +13,7 @@ export default function CreateNoteForm(){
         const noteContent = currentTarget.elements.note_content.value;
         if(!noteTitle || !noteContent) return;
 
-        const reponse = api.post("api/create_note/", { "note_title": noteTitle, "note_content": noteContent });
+        const reponse = api.post("api/note/", { "note_title": noteTitle, "note_content": noteContent });
         reponse
         .then((res) => res.status === 201 && window.location.reload())
         .catch((error) => alert(error));
